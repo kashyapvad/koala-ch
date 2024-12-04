@@ -1,7 +1,8 @@
 // src/services/apiService.js
 import axios from 'axios';
 
-const API_URL = process.env.KOALA_API_ENDPOINT || 'http://localhost:3000/api/v1'
+const API_URL = process.env.REACT_APP_KOALA_API_ENDPOINT || 'http://localhost:3000/api/v1'
+
 
 const apiClient = axios.create({
     baseURL: API_URL,

@@ -12,9 +12,9 @@ class InquiryResponseService
     opts = options.with_indifferent_access
     return unless message.user_content.present?
     model = opts[:llm_model] || DEFAULT_LLM_MODEL
-    response = HTTParty.get(ENV['PUBLIC_DOCS_MARK_DOWN'])
     public_docs_markdown ||= PUBLIC_DOCS_MARK_DOWN
-    public_docs_markdown ||= response.parsed_response if response.success?
+    response = HTTParty.get(ENV['PUBLIC_DOCS_MARK_DOWN_URL']) unless public_docs_markdown
+    public_docs_markdown ||= response.parsed_response if response
     return unless public_docs_markdown
     battle_cards = BattleCard.all.map{|b| {topic: b.topic, response: b.response} }.to_s
     prompt = PROMPT.gsub(INQUIRY_PLACEHOLDER, message.user_content)
