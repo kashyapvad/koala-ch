@@ -6,10 +6,10 @@ import { setInquiryData } from './store/actions/inquiryAction';
 const Home = () => {
     const [emailBody, setEmailBody] = useState('');
     const [responseMessage, setResponseMessage] = useState('');
-    const [isLoading, setIsLoading] = useState(false); // Loading state
+    const [isLoading, setIsLoading] = useState(false);
     const inquiry = useSelector((state) => {
-        const inquiriesArray = Object.values(state.inquiries); // Convert inquiries object to an array
-        return inquiriesArray[inquiriesArray.length - 1]; // Access the messages of the most recent inquiry
+        const inquiriesArray = Object.values(state.inquiries);
+        return inquiriesArray[inquiriesArray.length - 1];
     });
     const message = inquiry?.messages?.[0];
     const [emailResponse, setEmailResponse] = useState(message?.user_copy);
@@ -55,11 +55,11 @@ const Home = () => {
         try {
             const response = await trigger('inquiries', 'email_crafter', { email_body: emailBody });
             setEmailResponse(response?.messages?.[0]?.user_copy);
-            dispatch(setInquiryData(response)); // Dispatch action to store inquiry
+            dispatch(setInquiryData(response));
         } catch (error) {
           setResponseMessage(error.message);
         } finally {
-            setIsLoading(false); // Stop loading
+            setIsLoading(false);
         }
     };
 
