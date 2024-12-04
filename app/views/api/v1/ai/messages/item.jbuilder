@@ -1,0 +1,1 @@
+json.partial! 'api/v1/json/ai/message', item: @item, deep: true
