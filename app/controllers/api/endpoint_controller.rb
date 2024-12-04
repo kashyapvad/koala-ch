@@ -1,8 +1,9 @@
 class Api::EndpointController < ApplicationController
   #include Api::V1::Concerns::ErrorHandling
 
+  # This is a wrapper around the controllers to share common functionality.
 
-  before_action :require_member_access_token!, if: :member_access_token_required?
+  before_action :require_member_access_token!, if: :member_access_token_required? # defaulted to false in this case
   before_action :set_resource_name
   before_action :set_resource_klass
   before_action :set_item, only: [:show, :update]
@@ -10,7 +11,6 @@ class Api::EndpointController < ApplicationController
 
   def collection_scope()     nil end
   def item_scope()           collection_scope end
-  def validate_resource() true end
 
   def resource_name
     klass.name.underscore
@@ -21,7 +21,6 @@ class Api::EndpointController < ApplicationController
   end
 
   def update_item
-    puts update_attributes
     @item.update update_attributes
   end
 
@@ -34,13 +33,7 @@ class Api::EndpointController < ApplicationController
     render :item
   end
 
-  def render_trigger
-    type = params[:type]
-    render type
-  end
-
   def decorate_item
-    @item
   end
 
   def set_resource_name
@@ -70,7 +63,6 @@ class Api::EndpointController < ApplicationController
   def trigger_on_member
     type = params[:type]
     data = trigger_params[:data]
-    set_trigger_item_for type, data
     handler = "on_#{type}"
     send handler, data
     mark_member_action! type
@@ -80,16 +72,9 @@ class Api::EndpointController < ApplicationController
   def trigger_on_collection
     type = params[:type]
     data = trigger_params[:data]
-    set_trigger_collection_for type, data
     handler = "on_#{type}"
     send handler, data
     render_trigger
-  end
-
-  def set_trigger_item_for type, data # template for sub controller
-  end
-
-  def set_trigger_collection_for type, data # template for sub controller
   end
 
   def trigger_params
