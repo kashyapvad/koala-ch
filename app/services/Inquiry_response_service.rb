@@ -27,10 +27,4 @@ class InquiryResponseService
     message.user_copy = email_response
     message.save
   end
-
-  def self.search_battlecards message, options={}
-    opts = options.with_indifferent_access
-    
-  end
-
 end
