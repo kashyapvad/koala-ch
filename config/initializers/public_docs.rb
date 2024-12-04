@@ -1,5 +1,6 @@
 require 'httparty'
 
+# Pre-loading Public Docs Markdown while initializing
 begin
   response = HTTParty.get(ENV['PUBLIC_DOCS_MARK_DOWN_URL'])
   PUBLIC_DOCS_MARK_DOWN = nil
