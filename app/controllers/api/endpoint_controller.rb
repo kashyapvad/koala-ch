@@ -33,6 +33,11 @@ class Api::EndpointController < ApplicationController
     render :item
   end
 
+  def render_trigger
+    type = params[:type]
+    render type
+  end
+
   def decorate_item
   end
 
