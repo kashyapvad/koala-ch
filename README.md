@@ -13,8 +13,6 @@ Use of JBuilder: Implemented JBuilder files as views to facilitate seamless comm
 
 Frontend Structure: Established a resource store in the frontend to manage all necessary data, allowing for easy expansion as more resources are added.
 
-Simplified Error Handling: Opted to spend less time on error handling to concentrate on creating a straightforward framework, reducing technical debt as the application scales.
-
 Usage
 Visit the React app hosted at the production link and explore its features:
 
