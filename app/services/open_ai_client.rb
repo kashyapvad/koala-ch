@@ -18,7 +18,7 @@ class OpenAiClient
     }.to_json
     response = post("/chat/completions", headers: @base_headers, body: body).with_indifferent_access
     content = response[:choices].first[:message][:content]
-    eval content.gsub("`", "").gsub("json", "") 
+    JSON.parse(content.gsub(/```(json)?/, "").strip).with_indifferent_access
   end
 
   

@@ -16,6 +16,6 @@ class Message < ApplicationRecord
   belongs_to :inquiry
 
   def type
-    inquiry.type
+    inquiry.kind
   end
 end
